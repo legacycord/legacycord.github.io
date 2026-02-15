@@ -1,236 +1,339 @@
 <!DOCTYPE html>
-<html lang="tr">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Legacycord | Experience the Future</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;500;700&family=Inter:wght@400;600&display=swap" rel="stylesheet">
     <style>
         body {
-            background-color: #111214;
-            color: #f2f3f5;
+            background-color: rgb(10, 10, 12);
+            color: rgb(242, 243, 245);
             font-family: 'Inter', sans-serif;
-            scroll-behavior: smooth;
+            overflow-x: hidden;
         }
-        .discord-blue {
-            background-color: #5865F2;
+        
+        .font-display {
+            font-family: 'Space Grotesk', sans-serif;
         }
-        .discord-dark {
-            background-color: #1E1F22;
+
+        .blob {
+            position: absolute;
+            filter: blur(80px);
+            z-index: -1;
+            opacity: 0.4;
+            animation: float 10s infinite alternate;
         }
-        .gradient-text {
-            background: linear-gradient(135deg, #5865F2, #a2aaff);
+
+        .blob-1 {
+            top: 0;
+            left: 0;
+            width: 500px;
+            height: 500px;
+            background-color: rgb(88, 101, 242);
+            border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%;
+        }
+
+        .blob-2 {
+            bottom: 0;
+            right: 0;
+            width: 400px;
+            height: 400px;
+            background-color: rgb(235, 69, 158);
+            border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+            animation-delay: -5s;
+        }
+
+        @keyframes float {
+            0% { transform: translate(0, 0) rotate(0deg); }
+            100% { transform: translate(20px, 40px) rotate(10deg); }
+        }
+
+        .glass {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .glass-nav {
+            background: rgba(10, 10, 12, 0.8);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .text-gradient {
+            background: linear-gradient(135deg, rgb(88, 101, 242), rgb(235, 69, 158));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
-        .feature-card {
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+        .card-hover {
+            transition: all 0.3s ease;
         }
-        .feature-card:hover {
+
+        .card-hover:hover {
             transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            background: rgba(255, 255, 255, 0.07);
+            border-color: rgba(88, 101, 242, 0.5);
+            box-shadow: 0 10px 40px -10px rgba(88, 101, 242, 0.2);
         }
+
         .tooltip {
             visibility: hidden;
-            position: absolute;
-            bottom: 125%;
-            left: 50%;
-            transform: translateX(-50%);
-            background-color: #eb459e;
-            color: white;
-            text-align: center;
-            padding: 8px 12px;
-            border-radius: 8px;
-            width: 220px;
-            font-size: 0.875rem;
             opacity: 0;
-            transition: opacity 0.3s;
+            position: absolute;
+            bottom: 120%;
+            left: 50%;
+            transform: translateX(-50%) translateY(10px);
+            background-color: rgb(20, 20, 25);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgb(235, 235, 235);
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-size: 0.875rem;
+            white-space: nowrap;
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
             pointer-events: none;
-            z-index: 100;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+            z-index: 50;
         }
-        .tooltip-container:hover .tooltip {
+
+        .tooltip-wrap:hover .tooltip {
             visibility: visible;
             opacity: 1;
+            transform: translateX(-50%) translateY(0);
         }
-        .tooltip::after {
-            content: "";
-            position: absolute;
-            top: 100%;
-            left: 50%;
-            margin-left: -5px;
-            border-width: 5px;
-            border-style: solid;
-            border-color: #eb459e transparent transparent transparent;
+
+        .btn-primary {
+            background: rgb(88, 101, 242);
+            color: white;
+            transition: all 0.2s;
         }
-        .btn-link-style {
-            color: #9ca3af;
-            transition: color 0.2s ease, transform 0.2s ease;
+        
+        .btn-primary:hover {
+            background: rgb(71, 82, 196);
+            box-shadow: 0 0 20px rgba(88, 101, 242, 0.4);
         }
-        .btn-link-style:hover {
-            color: #ffffff;
-            transform: translateY(-2px);
+
+        .feature-icon {
+            background: linear-gradient(135deg, rgba(88, 101, 242, 0.2), rgba(88, 101, 242, 0.05));
+        }
+
+        @media (max-width: 768px) {
+            .blob { opacity: 0.2; }
         }
     </style>
 </head>
-<body class="antialiased">
+<body class="antialiased selection:bg-indigo-500 selection:text-white">
 
-    <nav class="sticky top-0 z-50 bg-[#111214]/80 backdrop-blur-md border-b border-white/5">
-        <div class="flex items-center justify-between px-6 py-4 max-w-7xl mx-auto">
-            <div class="text-xl font-extrabold tracking-tighter flex items-center gap-3">
-                <div class="w-10 h-10 discord-blue rounded-xl flex items-center justify-center shadow-lg shadow-blue-500/20">
-                    <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
-                        <path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028 14.09 14.09 0 0 0 1.226-1.994.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.419-2.157 2.419zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.946-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.419-2.157 2.419z"/>
+    <div class="fixed inset-0 overflow-hidden pointer-events-none">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+    </div>
+
+    <nav class="fixed top-0 w-full z-50 glass-nav transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+            <div class="flex items-center gap-3 group cursor-pointer">
+                <div class="w-10 h-10 rounded-xl bg-indigo-600 flex items-center justify-center text-white shadow-lg shadow-indigo-500/20 group-hover:scale-105 transition-transform duration-300">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028 14.09 14.09 0 0 0 1.226-1.994.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.419-2.157 2.419zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.946-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.419-2.157 2.419z"></path>
                     </svg>
                 </div>
-                Legacycord
+                <span class="text-xl font-bold tracking-tight font-display">Legacycord</span>
             </div>
-            
-            <div class="flex items-center gap-6">
-                <select id="langSwitcher" class="bg-transparent text-sm font-medium border border-white/10 rounded-lg px-2 py-1 outline-none cursor-pointer hover:bg-white/5">
-                    <option value="tr" class="bg-black">TR</option>
-                    <option value="en" class="bg-black">EN</option>
-                </select>
-                <a href="https://github.com/legacycord/legacycord/releases" target="_blank" class="btn-link-style text-sm font-bold">
-                    <span class="lang-tr">İndir</span>
-                    <span class="lang-en hidden">Download</span>
+
+            <div class="flex items-center gap-4">
+                <button id="langToggle" class="px-3 py-1.5 rounded-lg border border-white/10 text-sm font-medium hover:bg-white/5 transition-colors text-gray-300">
+                    EN / TR
+                </button>
+                <a href="https://github.com/legacycord/legacycord/releases" target="_blank" class="hidden sm:block px-5 py-2 rounded-full bg-white text-black font-bold text-sm hover:scale-105 transition-transform">
+                    Latest(x64/x32)
                 </a>
             </div>
         </div>
     </nav>
 
-    <header class="max-w-7xl mx-auto px-6 py-24 text-center">
-        <h1 class="text-5xl md:text-8xl font-extrabold mb-8 leading-[1.1] tracking-tight">
-            <span class="lang-tr">Discord'u</span><span class="lang-en hidden">Make Discord</span> 
-            <span class="gradient-text">
-                <span class="lang-tr">Hafiflet.</span><span class="lang-en hidden">Lighter.</span>
-            </span><br>
-            <span class="lang-tr">Deneyimi Katla.</span><span class="lang-en hidden">Multiply Experience.</span>
-        </h1>
-        <p class="text-lg md:text-xl text-gray-400 mb-12 max-w-3xl mx-auto leading-relaxed">
-            <span class="lang-tr">Legacycord, düşük kaynak tüketimi ve gelişmiş özelliklerle Discord deneyiminizi tamamen modernize eder. Gereksiz ağırlıklardan kurtulun.</span>
-            <span class="lang-en hidden">Legacycord modernizes your Discord experience with low resource consumption and advanced features. Get rid of unnecessary bloat.</span>
-        </p>
-        <div class="flex flex-col sm:flex-row items-center justify-center gap-12">
-            <a href="https://github.com/legacycord/legacycord/releases" target="_blank" class="btn-link-style font-bold text-xl uppercase tracking-widest">
-                <span class="lang-tr">Hemen İndir</span>
-                <span class="lang-en hidden">Download Now</span>
-            </a>
-            <div class="relative tooltip-container">
-                <button class="btn-link-style font-bold text-xl uppercase tracking-widest cursor-not-allowed opacity-50">
-                    <span class="lang-tr">Kaynak Kodları</span>
-                    <span class="lang-en hidden">Source Code</span>
-                </button>
-                <div class="tooltip">
-                    <span class="lang-tr">Bir takım sebeplerden ötürü kaynak kodları paylaşılamıyor.</span>
-                    <span class="lang-en hidden">Source codes cannot be shared due to several reasons.</span>
+    <main class="pt-32 pb-20 px-6">
+        <div class="max-w-7xl mx-auto">
+            <header class="text-center py-20 relative">
+                <div class="inline-block mb-6 px-4 py-1.5 rounded-full border border-indigo-500/30 bg-indigo-500/10 text-indigo-300 text-sm font-medium animate-pulse">
+                    <span class="lang-content" data-en="New Update Available" data-tr="Yeni Güncelleme Mevcut">New Update Available</span>
                 </div>
+                
+                <h1 class="text-5xl md:text-8xl font-bold mb-8 leading-tight tracking-tight font-display">
+                    <span class="lang-content" data-en="Make Discord" data-tr="Discord'u">Make Discord</span><br>
+                    <span class="text-gradient">
+                        <span class="lang-content" data-en="Lighter & Faster" data-tr="Daha Hafif ve Hızlı">Lighter & Faster</span>
+                    </span>
+                </h1>
+                
+                <p class="text-lg md:text-xl text-gray-400 mb-12 max-w-2xl mx-auto leading-relaxed">
+                    <span class="lang-content" 
+                          data-en="Legacycord modernizes your Discord experience by stripping away the bloat. 40% less memory usage, 100% more focus." 
+                          data-tr="Legacycord, gereksiz yükleri kaldırarak Discord deneyiminizi modernize eder. %40 daha az bellek kullanımı, %100 daha fazla odak.">
+                          Legacycord modernizes your Discord experience by stripping away the bloat. 40% less memory usage, 100% more focus.
+                    </span>
+                </p>
+
+                <div class="flex flex-col sm:flex-row items-center justify-center gap-6">
+                    <a href="https://github.com/legacycord/legacycord/releases" target="_blank" class="btn-primary px-8 py-4 rounded-xl font-bold text-lg flex items-center gap-3 group">
+                        <svg class="w-6 h-6 group-hover:translate-y-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+                        <span class="lang-content" data-en="Download for Windows" data-tr="Windows İçin İndir">Download for Windows</span>
+                    </a>
+                    
+                    <div class="relative tooltip-wrap">
+                        <button class="px-8 py-4 rounded-xl font-bold text-lg glass text-gray-400 cursor-not-allowed flex items-center gap-3 hover:bg-white/5 transition-colors">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path></svg>
+                            <span class="lang-content" data-en="Source Code" data-tr="Kaynak Kodları">Source Code</span>
+                        </button>
+                        <div class="tooltip">
+                            <span class="lang-content" data-en="Closed source for security integrity." data-tr="Güvenlik bütünlüğü için kapalı kaynak.">Closed source for security integrity.</span>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <section class="grid md:grid-cols-3 gap-6 py-20">
+                <div class="glass p-8 rounded-3xl card-hover relative overflow-hidden group">
+                    <div class="absolute top-0 right-0 w-32 h-32 bg-indigo-500/10 rounded-full blur-2xl -mr-16 -mt-16 group-hover:bg-indigo-500/20 transition-all"></div>
+                    <div class="w-14 h-14 feature-icon rounded-2xl flex items-center justify-center text-indigo-400 mb-6 text-2xl">
+                        🚀
+                    </div>
+                    <h3 class="text-2xl font-bold mb-3 font-display">
+                        <span class="lang-content" data-en="Ultra Performance" data-tr="Ultra Performans">Ultra Performance</span>
+                    </h3>
+                    <p class="text-gray-400 leading-relaxed">
+                        <span class="lang-content" 
+                              data-en="Optimized V8 engine integration reducing RAM usage significantly. Instant startup times." 
+                              data-tr="RAM kullanımını önemli ölçüde azaltan optimize edilmiş V8 motor entegrasyonu. Anında açılış süreleri.">
+                              Optimized V8 engine integration reducing RAM usage significantly. Instant startup times.
+                        </span>
+                    </p>
+                </div>
+
+                <div class="glass p-8 rounded-3xl card-hover relative overflow-hidden group">
+                    <div class="absolute top-0 right-0 w-32 h-32 bg-green-500/10 rounded-full blur-2xl -mr-16 -mt-16 group-hover:bg-green-500/20 transition-all"></div>
+                    <div class="w-14 h-14 rounded-2xl flex items-center justify-center text-green-400 mb-6 text-2xl" style="background: linear-gradient(135deg, rgba(34, 197, 94, 0.2), rgba(34, 197, 94, 0.05));">
+                        🛡️
+                    </div>
+                    <h3 class="text-2xl font-bold mb-3 font-display">
+                        <span class="lang-content" data-en="Zero Telemetry" data-tr="Sıfır Telemetri">Zero Telemetry</span>
+                    </h3>
+                    <p class="text-gray-400 leading-relaxed">
+                        <span class="lang-content" 
+                              data-en="We stripped all tracking modules. Your conversations and data stay strictly on your device." 
+                              data-tr="Tüm takip modüllerini kaldırdık. Konuşmalarınız ve verileriniz kesinlikle cihazınızda kalır.">
+                              We stripped all tracking modules. Your conversations and data stay strictly on your device.
+                        </span>
+                    </p>
+                </div>
+
+                <div class="glass p-8 rounded-3xl card-hover relative overflow-hidden group">
+                    <div class="absolute top-0 right-0 w-32 h-32 bg-purple-500/10 rounded-full blur-2xl -mr-16 -mt-16 group-hover:bg-purple-500/20 transition-all"></div>
+                    <div class="w-14 h-14 rounded-2xl flex items-center justify-center text-purple-400 mb-6 text-2xl" style="background: linear-gradient(135deg, rgba(168, 85, 247, 0.2), rgba(168, 85, 247, 0.05));">
+                        ✨
+                    </div>
+                    <h3 class="text-2xl font-bold mb-3 font-display">
+                        <span class="lang-content" data-en="Native Feel" data-tr="Yerel Deneyim">Native Feel</span>
+                    </h3>
+                    <p class="text-gray-400 leading-relaxed">
+                        <span class="lang-content" 
+                              data-en="Looks exactly like Discord, feels 10x faster. No learning curve required." 
+                              data-tr="Discord ile birebir aynı görünür, 10 kat daha hızlı hissettirir. Öğrenme süreci gerektirmez.">
+                              Looks exactly like Discord, feels 10x faster. No learning curve required.
+                        </span>
+                    </p>
+                </div>
+            </section>
+
+            <section class="py-24">
+                <div class="glass rounded-[3rem] p-12 md:p-20 text-center relative overflow-hidden border border-white/5">
+                    <div class="absolute inset-0 bg-gradient-to-b from-indigo-500/5 to-transparent pointer-events-none"></div>
+                    <h2 class="text-3xl md:text-5xl font-bold mb-8 font-display">
+                        <span class="lang-content" data-en="Ready to upgrade?" data-tr="Yükseltmeye hazır mısın?">Ready to upgrade?</span>
+                    </h2>
+                    <p class="text-gray-400 text-lg mb-10 max-w-xl mx-auto">
+                        <span class="lang-content" 
+                              data-en="Join thousands of users who have already switched to a lighter, faster messaging experience." 
+                              data-tr="Daha hafif ve hızlı bir mesajlaşma deneyimine geçmiş binlerce kullanıcıya katılın.">
+                              Join thousands of users who have already switched to a lighter, faster messaging experience.
+                        </span>
+                    </p>
+                    <a href="https://discord.gg/hEBd7Tub5N" target="_blank" class="inline-flex items-center justify-center px-8 py-4 bg-[#5865F2] hover:bg-[#4752C4] text-white rounded-xl font-bold transition-all hover:scale-105 shadow-xl shadow-indigo-500/20">
+                        <span class="lang-content" data-en="Join Discord Server" data-tr="Discord Sunucusuna Katıl">Join Discord Server</span>
+                    </a>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer class="border-t border-white/5 bg-black/40 backdrop-blur-md">
+        <div class="max-w-7xl mx-auto px-6 py-12 flex flex-col md:flex-row items-center justify-between gap-6">
+            <div class="flex items-center gap-2 text-gray-400">
+                <span class="font-bold text-gray-200">Legacycord</span>
+                <span>© 2026</span>
+            </div>
+            
+            <div class="flex gap-8 text-sm font-medium text-gray-500">
+                <a href="https://github.com/legacycord" target="_blank" class="hover:text-white transition-colors">GitHub</a>
+                <a href="https://discord.gg/hEBd7Tub5N" target="_blank" class="hover:text-white transition-colors">Discord</a>
+                <a href="#" class="hover:text-white transition-colors">
+                    <span class="lang-content" data-en="Terms" data-tr="Şartlar">Terms</span>
+                </a>
             </div>
         </div>
-    </header>
-
-    <section class="max-w-7xl mx-auto px-6 py-20 grid md:grid-cols-3 gap-8">
-        <div class="feature-card discord-dark p-10 rounded-3xl border border-white/5">
-            <div class="w-12 h-12 bg-blue-500/10 rounded-2xl flex items-center justify-center text-3xl mb-6">🚀</div>
-            <h3 class="text-2xl font-bold mb-4">
-                <span class="lang-tr">Ultra Performans</span>
-                <span class="lang-en hidden">Ultra Performance</span>
-            </h3>
-            <p class="text-gray-400 leading-relaxed">
-                <span class="lang-tr">Bellek kullanımını %40'a kadar azaltan optimize edilmiş motor. Daha hızlı açılış, daha akıcı geçişler.</span>
-                <span class="lang-en hidden">Optimized engine reducing memory usage by up to 40%. Faster startup, smoother transitions.</span>
-            </p>
-        </div>
-
-        <div class="feature-card discord-dark p-10 rounded-3xl border border-white/5">
-            <div class="w-12 h-12 bg-green-500/10 rounded-2xl flex items-center justify-center text-3xl mb-6">🛡️</div>
-            <h3 class="text-2xl font-bold mb-4">
-                <span class="lang-tr">Gizlilik Odaklı</span>
-                <span class="lang-en hidden">Privacy Focused</span>
-            </h3>
-            <p class="text-gray-400 leading-relaxed">
-                <span class="lang-tr">Verileriniz sadece sizin cihazınızda kalır. Hiçbir telemetry veya takip servisi barındırmaz.</span>
-                <span class="lang-en hidden">Your data stays on your device. Contains no telemetry or tracking services.</span>
-            </p>
-        </div>
-
-        <div class="feature-card discord-dark p-10 rounded-3xl border border-white/5">
-            <div class="w-12 h-12 bg-purple-500/10 rounded-2xl flex items-center justify-center text-3xl mb-6">✨</div>
-            <h3 class="text-2xl font-bold mb-4">
-                <span class="lang-tr">Orijinal Deneyim</span>
-                <span class="lang-en hidden">Original Experience</span>
-            </h3>
-            <p class="text-gray-400 leading-relaxed">
-                <span class="lang-tr">Discord'un çekirdek yapısına dokunmuyoruz. Bildiğiniz ve sevdiğiniz Discord arayüzü, sadece çok daha hızlı.</span>
-                <span class="lang-en hidden">We don't touch Discord's core structure. The Discord interface you know and love, just much faster.</span>
-            </p>
-        </div>
-    </section>
-
-    <section class="max-w-4xl mx-auto px-6 py-32 text-center">
-        <div class="bg-gradient-to-b from-white/5 to-transparent p-12 rounded-[40px] border border-white/5">
-            <h2 class="text-4xl font-bold mb-6">
-                <span class="lang-tr">Topluluğa Katılın</span>
-                <span class="lang-en hidden">Join the Community</span>
-            </h2>
-            <p class="text-gray-400 mb-10 text-lg">
-                <span class="lang-tr">Legacycord sürekli gelişen bir projedir. Fikirlerinizi paylaşın.</span>
-                <span class="lang-en hidden">Legacycord is a continuously evolving project. Share your ideas.</span>
-            </p>
-            <a href="https://discord.gg/hEBd7Tub5N" target="_blank" class="btn-link-style font-bold text-lg uppercase tracking-widest inline-block">
-                Discord Server
-            </a>
-        </div>
-    </section>
-
-    <footer class="text-center py-20 border-t border-white/5 bg-black/20">
-        <div class="mb-6 flex justify-center gap-8 text-gray-400">
-            <a href="https://github.com/legacycord" target="_blank" class="hover:text-white transition-colors">GitHub</a>
-            <a href="https://discord.gg/hEBd7Tub5N" target="_blank" class="hover:text-white transition-colors">Discord</a>
-        </div>
-        <p class="text-gray-500 text-sm px-6">
-            <span class="lang-tr">Legacycord bağımsız bir topluluk projesidir ve Discord Inc. ile resmi bir bağı yoktur.</span>
-            <span class="lang-en hidden">Legacycord is an independent community project and is not officially affiliated with Discord Inc.</span>
-            <br><br>
-             2026 Legacycord Team.
-        </p>
     </footer>
 
     <script>
-        const switcher = document.getElementById('langSwitcher');
-        const trElements = document.querySelectorAll('.lang-tr');
-        const enElements = document.querySelectorAll('.lang-en');
+        const contentElements = document.querySelectorAll('.lang-content');
+        const langToggleBtn = document.getElementById('langToggle');
+        
+        let currentLang = 'en';
 
-        function setLanguage(lang) {
-            if (lang === 'en') {
-                trElements.forEach(el => el.classList.add('hidden'));
-                enElements.forEach(el => el.classList.remove('hidden'));
-                document.title = "Legacycord | Experience the Future";
-                switcher.value = 'en';
-            } else {
-                enElements.forEach(el => el.classList.add('hidden'));
-                trElements.forEach(el => el.classList.remove('hidden'));
-                document.title = "Legacycord | Geleceğin Discord Deneyimi";
-                switcher.value = 'tr';
-            }
+        function updateContent() {
+            contentElements.forEach(element => {
+                const text = element.getAttribute(`data-${currentLang}`);
+                if (text) {
+                    element.style.opacity = '0';
+                    setTimeout(() => {
+                        element.textContent = text;
+                        element.style.opacity = '1';
+                    }, 200);
+                }
+            });
+            
+            document.title = currentLang === 'en' 
+                ? 'Legacycord | Experience the Future' 
+                : 'Legacycord | Geleceğin Discord Deneyimi';
+                
+            document.documentElement.lang = currentLang;
         }
 
-        // Tarayıcı dilini algıla
-        window.addEventListener('DOMContentLoaded', () => {
-            const userLang = navigator.language || navigator.userLanguage;
-            if (userLang.startsWith('tr')) {
-                setLanguage('tr');
-            } else {
-                setLanguage('en');
-            }
-        });
+        function toggleLanguage() {
+            currentLang = currentLang === 'en' ? 'tr' : 'en';
+            localStorage.setItem('legacycord_lang', currentLang);
+            updateContent();
+        }
 
-        switcher.addEventListener('change', (e) => {
-            setLanguage(e.target.value);
-        });
+        const savedLang = localStorage.getItem('legacycord_lang');
+        const browserLang = navigator.language || navigator.userLanguage;
+        
+        if (savedLang) {
+            currentLang = savedLang;
+        } else if (browserLang.startsWith('tr')) {
+            currentLang = 'tr';
+        }
+
+        langToggleBtn.addEventListener('click', toggleLanguage);
+        
+        contentElements.forEach(el => el.style.transition = 'opacity 0.2s ease');
+        
+        updateContent();
     </script>
-
 </body>
 </html>
