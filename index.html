@@ -155,7 +155,7 @@
     <button id="langToggle" class="px-3 py-1.5 rounded-lg border border-white/10 text-sm font-medium hover:bg-white/5 transition-colors text-gray-300">
         TR / EN
     </button>
-    <a href="https://github.com/legacycord/legacycord/releases" target="_blank" 
+    <a href="https://github.com/legacyclient/legacyclient/releases" target="_blank" 
        id="downloadBtn"
        class="hidden sm:block px-5 py-2 rounded-full bg-white text-black font-bold text-sm hover:scale-105 transition-transform"
        data-tr="İndir" 
@@ -189,7 +189,7 @@
                 </p>
 
                 <div class="flex flex-col sm:flex-row items-center justify-center gap-6">
-                    <a href="https://github.com/legacycord/legacycord/releases" target="_blank" class="btn-primary px-8 py-4 rounded-xl font-bold text-lg flex items-center gap-3 group">
+                    <a href="https://github.com/legacyclient/legacyclient/releases" target="_blank" class="btn-primary px-8 py-4 rounded-xl font-bold text-lg flex items-center gap-3 group">
                         <svg class="w-6 h-6 group-hover:translate-y-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
                         <span class="lang-content" data-en="Download for Windows" data-tr="Windows İçin İndir">Download for Windows</span>
                     </a>
@@ -288,7 +288,7 @@
             </div>
             
             <div class="flex gap-8 text-sm font-medium text-gray-500">
-                <a href="https://github.com/legacycord" target="_blank" class="hover:text-white transition-colors">GitHub</a>
+                <a href="https://github.com/legacyclient" target="_blank" class="hover:text-white transition-colors">GitHub</a>
                 <a href="https://discord.gg/hEBd7Tub5N" target="_blank" class="hover:text-white transition-colors">Discord</a>
                 <a href="#" class="hover:text-white transition-colors">
                     <span class="lang-content" data-en="Terms" data-tr="Şartlar">Terms</span>
@@ -316,19 +316,19 @@
             });
             
             document.title = currentLang === 'en' 
-                ? 'Legacycord | Experience the Future' 
-                : 'Legacycord | Geleceğin Discord Deneyimi';
+                ? 'legacyclient | Experience the Future' 
+                : 'legacyclient | Geleceğin Discord Deneyimi';
                 
             document.documentElement.lang = currentLang;
         }
 
         function toggleLanguage() {
             currentLang = currentLang === 'en' ? 'tr' : 'en';
-            localStorage.setItem('legacycord_lang', currentLang);
+            localStorage.setItem('legacyclient_lang', currentLang);
             updateContent();
         }
 
-        const savedLang = localStorage.getItem('legacycord_lang');
+        const savedLang = localStorage.getItem('legacyclient_lang');
         const browserLang = navigator.language || navigator.userLanguage;
         
         if (savedLang) {
